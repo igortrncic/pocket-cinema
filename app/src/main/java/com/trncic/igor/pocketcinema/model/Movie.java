@@ -25,14 +25,29 @@ import java.io.Serializable;
  * Created by igortrncic on 6/10/15.
  */
 public class Movie implements Serializable{
-    public static final String IMAGES_BASE_URL = "http://image.tmdb.org/t/p/w185/";
-    public static final String IMAGES_SIZE = "w185/";
+    public static final String IMAGES_BASE_URL = "http://image.tmdb.org/t/p/";
+
+    public static final String IMAGES_SIZE_185 = "w185/";
+    public static final String IMAGES_SIZE_342 = "w342/";
+    public static final String IMAGES_SIZE_500 = "w500/";
+    public static final String IMAGES_SIZE_780 = "w780/";
+    public static final String ORIGINAL = "original/";
 
     public int id;
     public String title;
     public String poster_path;
+    public String backdrop_path;
+    public String original_title;
+    public String overview;
+    public String release_date;
+    public String vote_average;
 
-    public String getPosterPath(){
-        return IMAGES_BASE_URL + poster_path;
+
+    public String getPosterPath(String... size){
+        return size.length != 0 ? IMAGES_BASE_URL + size[0] + poster_path :  IMAGES_BASE_URL + IMAGES_SIZE_342 + poster_path;
+    }
+
+    public String getBackdropPath(String... size){
+        return size.length != 0 ? IMAGES_BASE_URL + size[0] + backdrop_path :  IMAGES_BASE_URL + IMAGES_SIZE_780 + backdrop_path;
     }
 }

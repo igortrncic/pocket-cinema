@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="poster_image_left_margin">40dp</dimen>
+    <dimen name="poster_image_top_margin">55dp</dimen>
+    <dimen name="poster_image_bottom_margin">30dp</dimen>
+
+    <dimen name="horizontal_margin_poster_title">45dp</dimen>
+    <dimen name="details_image_width">300dp</dimen>
+</resources>

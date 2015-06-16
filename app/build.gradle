@@ -7,7 +7,6 @@ android {
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.rootProject.file("pocketcinema.properties"))))
 
-
     defaultConfig {
         applicationId "com.trncic.igor.pocketcinema"
         minSdkVersion 15

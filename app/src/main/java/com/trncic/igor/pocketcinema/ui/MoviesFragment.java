@@ -75,10 +75,11 @@ public class MoviesFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
     private void discoverMovies(){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String sortOptions = sharedPref.getString("sort_options", "");
 
-        RestClient.get().discoverMovies("popularity.desc", new Callback<BaseModel>() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String sortOptionsPref = sharedPref.getString(SettingsActivity.KEY_PREF_SORT_OPTIONS, "");
+
+        RestClient.get().discoverMovies(sortOptionsPref, new Callback<BaseModel>() {
             @Override
             public void success(BaseModel baseModel, Response response) {
                 mAdapter.setData(baseModel.results);

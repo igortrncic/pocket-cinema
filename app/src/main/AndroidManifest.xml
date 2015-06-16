@@ -12,7 +12,8 @@
         <activity
             android:name=".ui.MoviesActivity"
             android:launchMode="singleTop"
-            android:label="@string/title_activity_movies" >
+            android:label="@string/title_activity_movies"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +23,7 @@
         <activity
             android:name=".ui.DetailsActivity"
             android:label="@string/title_activity_details"
+            android:configChanges="orientation"
             android:parentActivityName=".ui.MoviesActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
