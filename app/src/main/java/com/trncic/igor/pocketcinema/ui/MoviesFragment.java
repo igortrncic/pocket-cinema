@@ -74,7 +74,7 @@ public class MoviesFragment extends Fragment implements AdapterView.OnItemClickL
         startActivity(intent);
     }
 
-    private void discoverMovies(){
+    public void discoverMovies(){
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String sortOptionsPref = sharedPref.getString(SettingsActivity.KEY_PREF_SORT_OPTIONS, "");

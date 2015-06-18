@@ -2,6 +2,7 @@ package com.trncic.igor.pocketcinema.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -36,6 +37,7 @@ import java.util.List;
  */
 public class SettingsActivity extends PreferenceActivity {
     public static final String KEY_PREF_SORT_OPTIONS = "sort_options";
+    public static int CHANGE_ORDER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class SettingsActivity extends PreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+
             return true;
         }
     };

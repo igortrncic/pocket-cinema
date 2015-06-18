@@ -4,9 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     
     <dimen name="poster_image_left_margin">20dp</dimen>
-    <dimen name="poster_image_top_margin">40dp</dimen>
+    <dimen name="poster_image_top_margin">35dp</dimen>
     <dimen name="poster_image_bottom_margin">20dp</dimen>
-
 
     <dimen name="horizontal_margin_poster_title">20dp</dimen>
 

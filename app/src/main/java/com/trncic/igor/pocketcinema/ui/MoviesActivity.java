@@ -11,10 +11,13 @@ import com.trncic.igor.pocketcinema.R;
 
 public class MoviesActivity extends AppCompatActivity {
 
+    MoviesFragment moviesFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
+        moviesFragment = (MoviesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
     }
 
     @Override
@@ -34,10 +37,17 @@ public class MoviesActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, SettingsActivity.CHANGE_ORDER);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SettingsActivity.CHANGE_ORDER) {
+            moviesFragment.discoverMovies();
+        }
     }
 }

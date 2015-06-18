@@ -1,18 +1,25 @@
 package com.trncic.igor.pocketcinema.ui;
 
-import android.graphics.Color;
+import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.graphics.Palette;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.trncic.igor.pocketcinema.R;
 import com.trncic.igor.pocketcinema.model.Movie;
+import com.trncic.igor.pocketcinema.picassoutils.PaletteTransformation;
 
 public class DetailsActivity extends AppCompatActivity {
     public static final String MOVIE = "movie";
@@ -31,6 +38,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         mMovie = (Movie) getIntent().getSerializableExtra(MOVIE);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle(R.string.details);
+        ab.setSubtitle(mMovie.title);
 
         mOriginalTitle = (TextView) findViewById(R.id.original_title);
         mBackgroundImage = (ImageView) findViewById(R.id.background_image);
@@ -51,30 +62,17 @@ public class DetailsActivity extends AppCompatActivity {
                 .placeholder(getResources().getDrawable(R.drawable.image_foreground))
                 .into(mBackgroundImage);
 
+        //This code is copied from blog of Jake Wharton
+        //http://jakewharton.com/coercing-picasso-to-play-with-palette/
         Picasso.with(this)
                 .load(mMovie.getPosterPath(Movie.IMAGES_SIZE_342))
-                .into(mPosterImage);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_details, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+                .transform(PaletteTransformation.instance())
+                .into(mPosterImage, new Callback.EmptyCallback() {
+                    @Override public void onSuccess() {
+                        Bitmap bitmap = ((BitmapDrawable) mPosterImage.getDrawable()).getBitmap();
+                        Palette palette = PaletteTransformation.getPalette(bitmap);
+                        mVoteAverage.setTextColor(palette.getLightVibrantColor(R.color.average_vote));
+                    }
+                });
     }
 }

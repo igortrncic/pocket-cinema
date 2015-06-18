@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.trncic.igor.pocketcinema.ui.DetailsActivity">
 
     <ImageView
@@ -30,40 +31,48 @@
                 android:adjustViewBounds="true"
                 android:minHeight="@dimen/details_image_height" />
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/info_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="195dp"
                 android:layout_alignTop="@id/poster_image"
                 android:layout_marginLeft="@dimen/horizontal_margin_poster_title"
-                android:layout_toRightOf="@id/poster_image"
-                android:orientation="vertical">
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@id/poster_image">
 
-                <TextView
+                <me.grantland.widget.AutofitTextView
                     android:id="@+id/original_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/poster_image"
+                    android:layout_alignParentTop="true"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginRight="16dp"
+                    android:maxLines="3"
                     android:text="@string/hello_world"
                     android:textAppearance="@android:style/TextAppearance.Holo.Large.Inverse"
-                    android:textColor="@android:color/white"
-                    android:textSize="48sp" />
+                    android:textSize="32sp" />
 
                 <TextView
                     android:id="@+id/release_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Holo.Medium.Inverse" />
+                    android:layout_alignBaseline="@+id/vote_average"
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Small.Inverse"
+                    android:textColor="@color/release_date" />
 
                 <TextView
                     android:id="@+id/vote_average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textAppearance="@android:style/TextAppearance.Holo.Medium.Inverse" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="56sp"
+                    android:textColor="@color/average_vote" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/overview"

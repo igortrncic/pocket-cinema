@@ -26,7 +26,7 @@ public class MoviesAdapter extends BaseAdapter {
     public MoviesAdapter(Context context, List<Movie> movies) {
         mMovies = movies;
         mContext = context;
-        mImageWidth = (int)mContext.getResources().getDimension(R.dimen.grid_image_width);
+        mImageWidth = (int) mContext.getResources().getDimension(R.dimen.grid_image_width);
         mImageHeight = (int) mContext.getResources().getDimension(R.dimen.grid_image_height);
     }
 
@@ -52,7 +52,7 @@ public class MoviesAdapter extends BaseAdapter {
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setAdjustViewBounds(true);
         }else {
             imageView = (ImageView) convertView;
@@ -60,9 +60,8 @@ public class MoviesAdapter extends BaseAdapter {
 
         Picasso.with(mContext)
                 .load(movie.getPosterPath())
-                .resize(mImageWidth, mImageHeight)
-                .centerCrop()
                 .into(imageView);
+
         return imageView;
     }
 
