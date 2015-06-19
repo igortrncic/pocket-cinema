@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +63,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .placeholder(getResources().getDrawable(R.drawable.image_foreground))
                 .into(mBackgroundImage);
 
-        //This code is copied from blog of Jake Wharton
+        //This code is taken from blog of Jake Wharton
         //http://jakewharton.com/coercing-picasso-to-play-with-palette/
         Picasso.with(this)
                 .load(mMovie.getPosterPath(Movie.IMAGES_SIZE_342))
@@ -71,7 +72,8 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override public void onSuccess() {
                         Bitmap bitmap = ((BitmapDrawable) mPosterImage.getDrawable()).getBitmap();
                         Palette palette = PaletteTransformation.getPalette(bitmap);
-                        mVoteAverage.setTextColor(palette.getLightVibrantColor(R.color.average_vote));
+                        mVoteAverage.setTextColor(palette.getVibrantColor(R.color.average_vote));
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantColor(R.color.average_vote)));
                     }
                 });
     }
